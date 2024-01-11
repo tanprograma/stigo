@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  url: 'https://pharmacy2024.onrender.com/api',
 };
