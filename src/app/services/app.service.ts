@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Outlet, InventoryItem } from '../interfaces';
 import { Observable, catchError, tap } from 'rxjs';
 import { HttpService } from './http.service';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
-  api = 'http://127.0.0.1:5000/api';
+  api = environment.url;
   outlets = [];
   medicines = [];
   stock: InventoryItem[] = [];
