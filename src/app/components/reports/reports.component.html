@@ -1,0 +1,30 @@
+<div class="reports-app">
+  <div class="reports-nav">
+    <div class="space center">{{ statisticType | uppercase }} STATS</div>
+    <div class="content">
+      <ul>
+        <li class="center" (click)="setStatistic('dispensed')">DISPENSED</li>
+        <li class="center" (click)="setStatistic('received')">RECEIVED</li>
+        <li class="center" (click)="setStatistic('issued')">ISSUED</li>
+      </ul>
+    </div>
+  </div>
+  <div class="reports-content">
+    <div class="space">
+      <app-dates
+        [(currentStatistics)]="currentStatistics"
+        [statistics]="statistics"
+      ></app-dates>
+    </div>
+    <div class="content">
+      <app-statistic-report-detailed
+        [statistics]="currentStatistics"
+        *ngIf="viewType == 'detailed'"
+      ></app-statistic-report-detailed>
+      <app-statistic
+        *ngIf="viewType == 'summary'"
+        [currentStatistics]="currentStatistics"
+      ></app-statistic>
+    </div>
+  </div>
+</div>

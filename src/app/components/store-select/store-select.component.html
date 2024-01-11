@@ -1,0 +1,16 @@
+<div class="store-select center theme-color">
+  <div class="card">
+    <div class="color"></div>
+
+    <div class="formgroup">
+      <label class="label" for="store">select clinic</label>
+      <select class="select" name="" id="" [(ngModel)]="outlet">
+        <option value="" disabled></option>
+        <option *ngFor="let store of stores" [value]="store.name">
+          {{ store.name }}
+        </option>
+      </select>
+      <button class="button" (click)="setOutlet()">GO TO CLINIC</button>
+    </div>
+  </div>
+</div>

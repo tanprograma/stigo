@@ -1,0 +1,20 @@
+<div class="detailed">
+  <table>
+    <thead>
+      <tr>
+        <th>medicine</th>
+        <th>unit</th>
+        <th>quantity</th>
+        <th>expiry</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of displayed">
+        <td>{{ s.commodity }}</td>
+        <td>{{ s.unit }}</td>
+        <td>{{ approximateStock(s) }}</td>
+        <td>{{ getExpiry(s) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

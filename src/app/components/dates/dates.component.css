@@ -1,0 +1,26 @@
+.search-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.query {
+  flex: 0 0 45%;
+  display: flex;
+}
+.dates {
+  flex: 0 0 45%;
+  display: flex;
+  padding: 5px;
+  height: 100%;
+}
+.dates-item {
+  flex: 0 0 50%;
+}
+.label {
+  flex: 0 0 20%;
+  text-align: right;
+}
+.input {
+  flex: 0 0 77%;
+  margin-left: 3px;
+}

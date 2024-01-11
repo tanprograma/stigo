@@ -1,0 +1,55 @@
+<form>
+  <div class="info"></div>
+  <div class="formgroup">
+    <label class="label" for="date">Date</label>
+    <input
+      class="input"
+      type="date"
+      name="date"
+      id="date"
+      [(ngModel)]="date"
+      (change)="changeDate()"
+    />
+  </div>
+  <div class="formgroup">
+    <label class="label" for="medicine">Medicine</label>
+    <input
+      class="input"
+      list="medicines"
+      name="medicine"
+      id="medicine"
+      autocomplete="off"
+      [(ngModel)]="medicine"
+      (change)="getAvailable()"
+    />
+    <datalist id="medicines">
+      <option *ngFor="let m of app.stock" [value]="m.commodity">
+        {{ m.commodity }}
+      </option>
+    </datalist>
+  </div>
+  <div class="formgroup">
+    <label class="label" for="quantity">Quatity</label>
+    <input
+      class="input"
+      type="text"
+      name="quantity"
+      id="quantity"
+      [(ngModel)]="quantity"
+    />
+  </div>
+  <div class="formgroup" *ngIf="item != undefined || item != null">
+    <label class="label" for="available">available</label>
+    <input
+      class="input"
+      type="text"
+      name="available"
+      id="available"
+      disabled=""
+      [ngModel]="item.stock"
+    />
+  </div>
+  <div class="formgroup">
+    <button class="button" (click)="add()">Add</button>
+  </div>
+</form>

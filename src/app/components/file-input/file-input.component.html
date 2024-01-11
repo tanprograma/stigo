@@ -1,0 +1,33 @@
+<form>
+  <div class="formgroup">
+    <label class="label" for="date">Date</label>
+    <input
+      class="input"
+      type="date"
+      name="date"
+      id="date"
+      [(ngModel)]="date"
+      (change)="changeDate()"
+    />
+  </div>
+  <div class="formgroup hidden">
+    <label class="label" for="date">file</label>
+    <input
+      class="input"
+      type="file"
+      name="dispensed"
+      id="dispensed"
+      accept=".csv"
+      #fileinput
+    />
+  </div>
+  <div class="formgroup" *ngIf="success">
+    <p>successfully loaded {{ filename }}</p>
+  </div>
+  <div class="formgroup" *ngIf="!success">
+    <button class="button" (click)="add(fileinput)">SELECT FILE</button>
+  </div>
+  <div class="formgroup" *ngIf="success">
+    <button class="button" (click)="parseData(fileinput)">ADD DATA</button>
+  </div>
+</form>

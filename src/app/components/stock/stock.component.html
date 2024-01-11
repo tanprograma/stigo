@@ -1,0 +1,18 @@
+<div class="stock">
+  <div class="stock-header">
+    <div class="formgroup">
+      <input
+        class="input center"
+        type="text"
+        placeholder="search medicine"
+        name=""
+        id=""
+        (keyup)="search(query.value)"
+        #query
+      />
+    </div>
+  </div>
+  <div class="stock-content">
+    <app-statistic-report [displayed]="displayed"></app-statistic-report>
+  </div>
+</div>

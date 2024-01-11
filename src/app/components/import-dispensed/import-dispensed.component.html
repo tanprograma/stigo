@@ -1,0 +1,30 @@
+<div class="dispense-app">
+  <div class="dispense-form">
+    <app-file-input [(date)]="date" (onAdd)="add($event)"></app-file-input>
+    <!-- <app-dispense-formdate
+      [(date)]="date"
+      (onAdd)="add($event)"
+    ></app-dispense-form> -->
+  </div>
+  <div class="dispense-items">
+    <div class="space">
+      <h2 class="center">
+        items :{{ items.length }} dispensed:{{ submitted }} prescriptions:
+        {{ prescriptions
+        }}<button (click)="downloadCSV()">
+          <span><fa-icon [icon]="icon"></fa-icon></span> SAVE AS EXCELL
+        </button>
+      </h2>
+    </div>
+    <div class="dispense-content">
+      <app-dispense-items
+        [items]="items"
+        (onDelete)="remove($event)"
+      ></app-dispense-items>
+    </div>
+
+    <div class="dispense-footer" *ngIf="items.length > 0">
+      <button class="button" (click)="submit()">SUBMIT REQUEST</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.theme-color {
+  background-color: rgb(189, 217, 217);
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.full {
+  height: 100%;
+  width: 100%;
+}
+/* styles for form items */
+.formgroup {
+  margin: 5px 0;
+}
+.label,
+.input,
+.select,
+.button {
+  display: block;
+  width: 80%;
+  margin: 5px auto;
+  font-size: large;
+}
+.select,
+.button,
+.input {
+  height: 5vh;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: rgb(57, 57, 184);
+  color: white;
+}
+.button:hover {
+  background-color: black;
+  color: white;
+}
+.input {
+  text-align: center;
+}
+.space {
+  height: 15%;
+  background-color: grey;
+}

@@ -1,0 +1,31 @@
+.stock {
+  height: 100%;
+}
+.stock-header {
+  height: 15%;
+  background-color: grey;
+  padding: 2px;
+}
+.stock-content {
+  height: 85%;
+  overflow-y: scroll;
+}
+.stock-content::-webkit-scrollbar {
+  display: none;
+}
+table {
+  width: 70%;
+  border-collapse: collapse;
+  margin: 2px auto;
+}
+th,
+td {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  text-align: left;
+  font-size: large;
+}
+tbody tr:hover {
+  background-color: rgb(185, 245, 97);
+}
