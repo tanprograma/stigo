@@ -1,4 +1,4 @@
-<div class="reports-app">
+<div class="reports-app" *ngIf="!loading">
   <div class="reports-nav">
     <div class="space center">{{ statisticType | uppercase }} STATS</div>
     <div class="content">
@@ -27,4 +27,7 @@
       ></app-statistic>
     </div>
   </div>
+</div>
+<div class="loader" *ngIf="loading">
+  <app-loader [message]="message" [class.loading]="loading"></app-loader>
 </div>

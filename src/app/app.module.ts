@@ -11,7 +11,7 @@ import { DispenseAppComponent } from './components/dispense-app/dispense-app.com
 import { StoreSelectComponent } from './components/store-select/store-select.component';
 import { DispenseFormComponent } from './components/dispense-form/dispense-form.component';
 import { PrescriptionItemsComponent } from './components/prescription-items/prescription-items.component';
-import { DispenseImportAppComponent } from './components/dispense-import-app/dispense-import-app.component';
+
 import { DispenseItemsComponent } from './components/dispense-items/dispense-items.component';
 import { StockComponent } from './components/stock/stock.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -22,6 +22,7 @@ import { StatisticReportDetailedComponent } from './components/statistic-report-
 import { DatesComponent } from './components/dates/dates.component';
 import { ImportDispensedComponent } from './components/import-dispensed/import-dispensed.component';
 import { FileInputComponent } from './components/file-input/file-input.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { FileInputComponent } from './components/file-input/file-input.component
     StoreSelectComponent,
     DispenseFormComponent,
     PrescriptionItemsComponent,
-    DispenseImportAppComponent,
+
     DispenseItemsComponent,
     StockComponent,
     ReportsComponent,
@@ -43,8 +44,15 @@ import { FileInputComponent } from './components/file-input/file-input.component
     DatesComponent,
     ImportDispensedComponent,
     FileInputComponent,
+    LoaderComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FontAwesomeModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

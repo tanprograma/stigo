@@ -1,4 +1,4 @@
-<div class="store-select center theme-color">
+<div class="store-select center theme-color" *ngIf="!loading">
   <div class="card">
     <div class="color"></div>
 
@@ -13,4 +13,7 @@
       <button class="button" (click)="setOutlet()">GO TO CLINIC</button>
     </div>
   </div>
+</div>
+<div class="loader">
+  <app-loader [message]="message"></app-loader>
 </div>

@@ -31,3 +31,6 @@ button:hover {
   background-color: black;
   color: white;
 }
+.form {
+  height: 85%;
+}

@@ -15,6 +15,7 @@ export class StatisticReportComponent implements OnInit {
     return Math.floor(item.stock / item.unit_value);
   }
   getExpiry(s: StockItem) {
+    if (s.expiry == undefined) return '';
     return new Date(s.expiry).toLocaleDateString();
   }
 }

@@ -10,6 +10,8 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 export class DispenseAppComponent implements OnInit {
   icon = faArrowDown;
   date = '';
+  loading = false;
+  message = '';
   inventory: InventoryItem[] = [];
   items: {
     commodity: string;
@@ -25,10 +27,13 @@ export class DispenseAppComponent implements OnInit {
     this.getInventory();
   }
   getInventory() {
+    this.loading = true;
+    this.message = 'initializing data';
     if (this.app.stock.length > 0) this.inventory = this.app.stock;
     this.app.getStock().subscribe((inv) => {
       this.app.stock = inv;
       this.inventory = inv;
+      this.loading = false;
     });
   }
   clearPrescription() {
@@ -60,8 +65,11 @@ export class DispenseAppComponent implements OnInit {
     });
   }
   submit() {
+    this.loading = true;
+    this.message = 'uploading dispense data';
     this.app.dispense(this.items).subscribe((result) => {
       console.log({ result });
+      this.loading = false;
       if (result.length > 0) {
         this.submitted += result.length;
         // modifies stock

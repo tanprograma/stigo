@@ -1,6 +1,6 @@
-<div class="dispense-app">
+<div class="dispense-app" *ngIf="!loading">
   <div class="dispense-form">
-    <div class="space"></div>
+    <div class="space center" [style]="{ color: 'white' }">DISPENSE FORM</div>
     <div class="form">
       <app-dispense-form
         [(date)]="date"
@@ -29,4 +29,7 @@
       <button class="button" (click)="submit()">SUBMIT REQUEST</button>
     </div>
   </div>
+</div>
+<div class="loader" *ngIf="loading">
+  <app-loader [message]="message"></app-loader>
 </div>

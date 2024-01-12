@@ -19,16 +19,21 @@ export class ImportDispensedComponent implements OnInit {
   }[] = [];
   submitted = 0;
   prescriptions = 0;
+  loading = false;
+  message = '';
   constructor(private app: AppService) {}
 
   ngOnInit(): void {
     this.getInventory();
   }
   getInventory() {
+    this.loading = true;
+    this.message = 'initializing the app';
     if (this.app.stock.length > 0) this.inventory = this.app.stock;
     this.app.getStock().subscribe((inv) => {
       this.app.stock = inv;
       this.inventory = inv;
+      this.loading = false;
     });
   }
   clearPrescription() {
@@ -55,8 +60,10 @@ export class ImportDispensedComponent implements OnInit {
     });
   }
   submit() {
+    this.loading = true;
+    this.message = 'uploading the dispense data';
     this.app.dispense(this.items).subscribe((result) => {
-      console.log({ result });
+      this.loading = false;
       if (result.length > 0) {
         this.submitted += result.length;
         // modifies stock

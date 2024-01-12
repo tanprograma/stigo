@@ -43,3 +43,6 @@ li:hover {
 .label {
   text-align: right;
 }
+.loading {
+  display: none;
+}

@@ -9,12 +9,20 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ['./store-select.component.css'],
 })
 export class StoreSelectComponent implements OnInit {
+  loading = false;
   stores: Outlet[] = [];
   outlet = '';
+  message = 'fetching resources';
   constructor(private app: AppService, private router: Router) {}
 
   ngOnInit(): void {
-    this.stores = this.app.stores;
+    this.loading = true;
+
+    this.app.getStores().subscribe((i) => {
+      this.stores = i;
+      this.app.stores = i;
+      this.loading = false;
+    });
   }
   setOutlet() {
     if (this.outlet.length > 0) {

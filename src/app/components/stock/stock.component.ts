@@ -9,10 +9,18 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class StockComponent implements OnInit {
   constructor(public app: AppService) {}
+  loading = false;
+  message = 'getting stock data';
+  stock: StockItem[] = [];
   displayed: StockItem[] = [];
 
   ngOnInit(): void {
-    this.app.getStock();
+    this.loading = true;
+    this.app.getStock().subscribe((s) => {
+      this.stock = s;
+      this.displayed = this.stock;
+      this.loading = false;
+    });
     this.initialize();
   }
   initialize() {
@@ -27,7 +35,7 @@ export class StockComponent implements OnInit {
     return Math.floor(item.stock / item.unit_value);
   }
   search(query: string) {
-    this.displayed = this.app.stock.filter((item) => {
+    this.displayed = this.stock.filter((item) => {
       const regex = new RegExp(query, 'i');
       return regex.test(item.commodity);
     });

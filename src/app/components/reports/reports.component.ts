@@ -14,6 +14,8 @@ type ViewType = 'summary' | 'detailed';
   styleUrls: ['./reports.component.css'],
 })
 export class ReportsComponent implements OnInit {
+  loading = false;
+  message = 'getting data...';
   viewType: ViewType = 'summary';
   statisticType: StatisticType = 'dispensed';
   statistics: StatisticItem[] = [];
@@ -36,12 +38,13 @@ export class ReportsComponent implements OnInit {
   }
   // inializes data
   getStatistics() {
+    this.loading = false;
     this.app.getStock().subscribe((stock) => {
       this.statistics = this.reduceStatistics(stock);
       this.currentStatistics = this.statistics.filter((s) => {
         return s.voucher == this.statisticType;
       });
-      console.log({ curr: this.currentStatistics });
+      this.loading = true;
     });
   }
   // creates one list of statistics items from all stock

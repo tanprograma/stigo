@@ -16,24 +16,7 @@ export class AppService {
     name: 'MAINCLINIC',
     isWarehouse: false,
   };
-  stores: Outlet[] = [
-    {
-      name: 'MAINCLINIC',
-      isWarehouse: false,
-    },
-    {
-      name: 'SADDLEDAM',
-      isWarehouse: false,
-    },
-    {
-      name: 'POWERHOUSE',
-      isWarehouse: false,
-    },
-    {
-      name: 'RIGHTBANK',
-      isWarehouse: false,
-    },
-  ];
+  stores: Outlet[] = [];
   constructor(private http: HttpService) {}
   getStock(f?: Function): Observable<InventoryItem[]> {
     const url = `${this.api}/inventories/${this.outlet.name}`;
@@ -43,6 +26,17 @@ export class AppService {
         tap(
           (_) => console.log(`fetched ${url}`),
           catchError(this.http.handleError<InventoryItem[]>('fetch stock', []))
+        )
+      );
+  }
+  getStores(): Observable<Outlet[]> {
+    const url = `${this.api}/stores`;
+    return this.http
+      .get<Outlet[]>(url)
+      .pipe(
+        tap(
+          (_) => console.log(`fetched ${url}`),
+          catchError(this.http.handleError<Outlet[]>('fetch outlet', []))
         )
       );
   }

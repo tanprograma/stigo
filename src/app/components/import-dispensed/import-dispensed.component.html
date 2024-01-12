@@ -1,10 +1,11 @@
-<div class="dispense-app">
+<div class="dispense-app" *ngIf="!loading">
   <div class="dispense-form">
-    <app-file-input [(date)]="date" (onAdd)="add($event)"></app-file-input>
-    <!-- <app-dispense-formdate
-      [(date)]="date"
-      (onAdd)="add($event)"
-    ></app-dispense-form> -->
+    <div class="space center" [style]="{ color: 'white' }">
+      IMPORT-DISPENSED FORM
+    </div>
+    <div class="form">
+      <app-file-input [(date)]="date" (onAdd)="add($event)"></app-file-input>
+    </div>
   </div>
   <div class="dispense-items">
     <div class="space">
@@ -27,4 +28,7 @@
       <button class="button" (click)="submit()">SUBMIT REQUEST</button>
     </div>
   </div>
+</div>
+<div class="loader" *ngIf="loading">
+  <app-loader [message]="message"></app-loader>
 </div>

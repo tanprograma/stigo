@@ -1,4 +1,7 @@
-<div class="stock">
+<div class="stock" *ngIf="!loading">
+  <div class="loader">
+    <app-loader></app-loader>
+  </div>
   <div class="stock-header">
     <div class="formgroup">
       <input
@@ -15,4 +18,7 @@
   <div class="stock-content">
     <app-statistic-report [displayed]="displayed"></app-statistic-report>
   </div>
+</div>
+<div class="loader" *ngIf="loading">
+  <app-loader [message]="message"></app-loader>
 </div>
