@@ -38,13 +38,13 @@ export class ReportsComponent implements OnInit {
   }
   // inializes data
   getStatistics() {
-    this.loading = false;
+    this.loading = true;
     this.app.getStock().subscribe((stock) => {
       this.statistics = this.reduceStatistics(stock);
       this.currentStatistics = this.statistics.filter((s) => {
         return s.voucher == this.statisticType;
       });
-      this.loading = true;
+      this.loading = false;
     });
   }
   // creates one list of statistics items from all stock

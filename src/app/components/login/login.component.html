@@ -1,0 +1,56 @@
+<div class="container center">
+  <form class="login-form">
+    <div class="space center" [style]="{ color: 'white' }">login form</div>
+    <div class="formgroup">
+      <label class="label" for="username">Username</label>
+      <select
+        class="input center"
+        name="username"
+        id="username"
+        [(ngModel)]="user.username"
+      >
+        <option value=""></option>
+        <option [value]="u.username" *ngFor="let u of users">
+          {{ u.username }}
+        </option>
+      </select>
+    </div>
+    <div class="formgroup">
+      <label class="label" for="password">password</label>
+      <input
+        class="input center"
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        *ngIf="isPassword"
+      />
+      <input
+        class="input center"
+        type="text-password"
+        id="text-password"
+        name="text-password"
+        [(ngModel)]="user.password"
+        *ngIf="!isPassword"
+      />
+    </div>
+
+    <div class="formgroup">
+      <div class="checkbox">
+        <input
+          class="check"
+          type="checkbox"
+          id="checkbox"
+          name="checkbox"
+          (change)="show()"
+        />
+        <label class="check-label" for="checkbox">{{
+          isPassword ? "show password" : "hide password"
+        }}</label>
+      </div>
+    </div>
+    <div class="formgroup">
+      <button class="button" (click)="login()">LOGIN</button>
+    </div>
+  </form>
+</div>

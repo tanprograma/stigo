@@ -18,12 +18,14 @@
 }
 /* styles for form items */
 .formgroup {
-  margin: 5px 0;
+  width: 90%;
+  margin: 8px auto;
 }
 .label,
 .input,
 .select,
-.button {
+.button,
+.checkbox {
   display: block;
   width: 80%;
   margin: 5px auto;
@@ -31,7 +33,8 @@
 }
 .select,
 .button,
-.input {
+.input,
+.checkbox {
   height: 5vh;
   border-radius: 5px;
 }

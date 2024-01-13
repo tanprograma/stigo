@@ -1,12 +1,15 @@
 <div class="store-select center theme-color" *ngIf="!loading">
-  <div class="card">
+  <div class="login-container" *ngIf="!loggedIn">
+    <app-login [users]="users" (onLogin)="login($event)"></app-login>
+  </div>
+  <div class="card" *ngIf="loggedIn">
     <div class="color"></div>
 
     <div class="formgroup">
       <label class="label" for="store">select clinic</label>
       <select class="select" name="" id="" [(ngModel)]="outlet">
         <option value="" disabled></option>
-        <option *ngFor="let store of stores" [value]="store.name">
+        <option *ngFor="let store of authStores" [value]="store.name">
           {{ store.name }}
         </option>
       </select>
@@ -14,6 +17,6 @@
     </div>
   </div>
 </div>
-<div class="loader">
+<div class="loader" *ngIf="loading">
   <app-loader [message]="message"></app-loader>
 </div>

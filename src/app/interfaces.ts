@@ -33,3 +33,12 @@ export interface ReducedStatistic {
   commodity: string;
   quantity: number;
 }
+export interface User {
+  username: string;
+  password?: string;
+  role?: string;
+}
+export interface LoginRes {
+  result: { username: string; role: string } | null;
+  error: string | null;
+}

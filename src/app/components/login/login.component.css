@@ -1,0 +1,20 @@
+.login-form {
+  background-color: beige;
+  height: 60%;
+  width: 35%;
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.formgroup {
+  border-left: 2px solid blue;
+  padding: 5px;
+}
+.container {
+  height: 100%;
+  display: flex;
+}
+.check {
+  margin-right: 5px;
+}

@@ -23,6 +23,7 @@ import { DatesComponent } from './components/dates/dates.component';
 import { ImportDispensedComponent } from './components/import-dispensed/import-dispensed.component';
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     ImportDispensedComponent,
     FileInputComponent,
     LoaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
