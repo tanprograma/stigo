@@ -39,11 +39,9 @@ export class ReportsComponent implements OnInit {
   // inializes data
   getStatistics() {
     this.loading = true;
+    this.initStatistics(this.app.inventory);
     this.app.getStock().subscribe((stock) => {
-      this.statistics = this.reduceStatistics(stock);
-      this.currentStatistics = this.statistics.filter((s) => {
-        return s.voucher == this.statisticType;
-      });
+      this.initStatistics(stock);
       this.loading = false;
     });
   }
@@ -69,5 +67,12 @@ export class ReportsComponent implements OnInit {
       return { ...item, voucher: issue, commodity: data.commodity };
     });
     return [...dispensed, ...issued, ...received];
+  }
+
+  initStatistics(stock: InventoryItem[]) {
+    this.statistics = this.reduceStatistics(stock);
+    this.currentStatistics = this.statistics.filter((s) => {
+      return s.voucher == this.statisticType;
+    });
   }
 }

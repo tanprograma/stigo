@@ -28,6 +28,7 @@ export class DispenseAppComponent implements OnInit {
   }
   getInventory() {
     this.loading = true;
+    this.inventory = this.app.inventory;
     this.message = 'initializing data';
     if (this.app.stock.length > 0) this.inventory = this.app.stock;
     this.app.getStock().subscribe((inv) => {
@@ -37,7 +38,6 @@ export class DispenseAppComponent implements OnInit {
     });
   }
   clearPrescription() {
-    this.date = '';
     this.items = [];
   }
   add(item: { commodity: string; quantity: number }) {
