@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ReducedStatistic, StatisticItem } from 'src/app/interfaces';
+import { faRecycle } from '@fortawesome/free-solid-svg-icons';
+import { ReducedStatistic, StatisticItem, StockItem } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-statistic',
@@ -7,13 +8,17 @@ import { ReducedStatistic, StatisticItem } from 'src/app/interfaces';
   styleUrls: ['./statistic.component.css'],
 })
 export class StatisticComponent implements OnInit {
-  @Input() currentStatistics!: StatisticItem[];
+  @Input() statistics!: StatisticItem[];
+
+  @Input() detailed!: boolean;
+
+  icon = faRecycle;
   constructor() {}
 
   ngOnInit(): void {}
   reduceCurrentStatistics(): ReducedStatistic[] {
     return Object.values(
-      this.currentStatistics.reduce((cum: Signature, curr: StatisticItem) => {
+      this.statistics.reduce((cum: Signature, curr: StatisticItem) => {
         const { commodity, quantity } = curr;
         if (cum[commodity] != undefined) {
           cum[commodity].quantity += quantity;
@@ -23,6 +28,13 @@ export class StatisticComponent implements OnInit {
         return cum;
       }, new Signature())
     );
+  }
+
+  getDate(s: StatisticItem) {
+    return new Date(s.date).toLocaleDateString().replaceAll('/', '-');
+  }
+  getTime(s: StatisticItem) {
+    return new Date(s.date).toLocaleTimeString();
   }
 }
 class Signature {

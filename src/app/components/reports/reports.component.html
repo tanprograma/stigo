@@ -1,6 +1,11 @@
 <div class="reports-app" *ngIf="!loading">
   <div class="reports-nav">
-    <div class="space center">{{ statisticType | uppercase }} STATS</div>
+    <div class="space center">
+      <button class="button center" (click)="toggleView()">
+        {{ statisticType | uppercase }} STATS/
+        {{ detailed ? "DETAILED" : "SUMMARY" }}
+      </button>
+    </div>
     <div class="content">
       <ul>
         <li class="center" (click)="setStatistic('dispensed')">DISPENSED</li>
@@ -10,20 +15,17 @@
     </div>
   </div>
   <div class="reports-content">
-    <div class="space">
-      <app-dates
-        [(currentStatistics)]="currentStatistics"
-        [statistics]="statistics"
-      ></app-dates>
+    <div class="space filter">
+      <app-dates (onFilter)="search($event)"></app-dates>
     </div>
     <div class="content">
-      <app-statistic-report-detailed
-        [statistics]="currentStatistics"
-        *ngIf="viewType == 'detailed'"
-      ></app-statistic-report-detailed>
+      <h1 class="stat-title">
+        {{ statisticType | uppercase }} STATS/
+        {{ detailed ? "DETAILED" : "SUMMARY " }} {{ title }}
+      </h1>
       <app-statistic
-        *ngIf="viewType == 'summary'"
-        [currentStatistics]="currentStatistics"
+        [detailed]="detailed"
+        [statistics]="currentStatistics"
       ></app-statistic>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <div class="detailed">
-  <table>
+  <table *ngIf="!detailed">
     <thead>
       <tr>
         <th>medicine</th>
@@ -9,6 +9,29 @@
     </thead>
     <tbody>
       <tr *ngFor="let s of reduceCurrentStatistics()">
+        <td>{{ s.commodity }}</td>
+        <td>each</td>
+        <td>{{ s.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="detailed">
+    <thead>
+      <tr>
+        <th>date</th>
+        <th>client</th>
+        <th>medicine</th>
+        <th>unit</th>
+        <th>quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of statistics">
+        <td>
+          <span>{{ getDate(s) }}</span>
+          <span class="time">{{ getTime(s) }}</span>
+        </td>
+        <td>{{ s.client }}</td>
         <td>{{ s.commodity }}</td>
         <td>each</td>
         <td>{{ s.quantity }}</td>

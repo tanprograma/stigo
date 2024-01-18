@@ -3,7 +3,17 @@
   display: flex;
   justify-content: space-evenly;
 }
-.query {
+.query-item {
+  flex: 0 0 35%;
+}
+.dates-item {
+  flex: 0 0 25%;
+}
+.btn-item {
+  flex: 0 0 10%;
+}
+
+/* .query {
   flex: 0 0 45%;
   display: flex;
 }
@@ -12,15 +22,13 @@
   display: flex;
   padding: 5px;
   height: 100%;
-}
-.dates-item {
-  flex: 0 0 50%;
-}
+} */
+
 .label {
   flex: 0 0 20%;
   text-align: right;
 }
-.input {
-  flex: 0 0 77%;
-  margin-left: 3px;
+.button:hover {
+  background-color: red;
+  color: white;
 }

@@ -57,3 +57,14 @@
 .loader {
   height: 100%;
 }
+
+@media print {
+  .reports-nav,
+  .filter,
+  .app-header {
+    display: none;
+  }
+  .reports-content {
+    flex: 0 0 100%;
+  }
+}

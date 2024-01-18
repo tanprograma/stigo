@@ -46,3 +46,17 @@ li:hover {
 .loading {
   display: none;
 }
+.button {
+  font-size: smaller;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+.button:hover {
+  background-color: blue;
+}
+.stat-title {
+  text-align: center;
+  font-size: medium;
+  margin: 5px 0;
+}

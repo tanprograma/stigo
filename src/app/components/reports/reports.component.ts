@@ -16,20 +16,30 @@ type ViewType = 'summary' | 'detailed';
 export class ReportsComponent implements OnInit {
   loading = false;
   message = 'getting data...';
-  viewType: ViewType = 'summary';
+  detailed = false;
   statisticType: StatisticType = 'dispensed';
   statistics: StatisticItem[] = [];
   currentStatistics: StatisticItem[] = [];
-  // search query
-  query = '';
-  // search date
-  date: { begin: string; end: string } = { begin: '', end: '' };
+  title = '';
+  setTitle(date: { begin: string; end: string }) {
+    if (date.begin == '' && date.end == '') return '';
+    if (date.begin == '' && date.end != '') {
+      return `UNTIL ${date.end}`;
+    }
+    if (date.begin != '' && date.end == '') {
+      return `FROM ${date.begin}`;
+    }
+
+    return `FROM ${date.begin} UNTIL ${date.end}`;
+  }
   constructor(private app: AppService) {}
 
   ngOnInit(): void {
     this.getStatistics();
   }
-
+  toggleView() {
+    this.detailed = !this.detailed;
+  }
   setStatistic(i: StatisticType) {
     this.statisticType = i;
     this.currentStatistics = this.statistics.filter((s) => {
@@ -74,5 +84,52 @@ export class ReportsComponent implements OnInit {
     this.currentStatistics = this.statistics.filter((s) => {
       return s.voucher == this.statisticType;
     });
+  }
+  search({
+    date,
+    query,
+  }: {
+    query: string;
+    date: { begin: string; end: string };
+  }) {
+    this.title = this.setTitle(date);
+    this.currentStatistics = this.statistics
+      .filter((item) => {
+        if (query == '') return true;
+        const regex = new RegExp(query, 'i');
+        return regex.test(item.commodity);
+      })
+      .filter((i) => {
+        if (date.begin == '') return true;
+        const d = new Date(date.begin).getTime();
+        return i.date >= d;
+      })
+      .filter((i) => {
+        if (date.end == '') return true;
+        const d = new Date(date.end);
+        const newd = d.setDate(d.getDate() + 1) - 1;
+        return i.date <= newd;
+      });
+  }
+  // test item date against component date
+  filterByDate(date: number, d: { begin: string; end: string }) {
+    if (d.begin.length > 0 && d.end == '') {
+      const begin = new Date(d.begin).getTime();
+
+      return date >= begin;
+    }
+    if (d.end.length > 0 && d.begin == '') {
+      const end = new Date(d.end).getTime();
+
+      return date <= end;
+    }
+    if (d.end.length > 0 && d.begin.length > 0) {
+      const begin = new Date(d.begin).getTime();
+      const end = new Date(d.end).getTime();
+
+      return date >= begin && date <= end;
+    }
+
+    return true;
   }
 }

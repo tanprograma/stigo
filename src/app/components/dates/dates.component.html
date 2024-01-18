@@ -1,39 +1,42 @@
-<div class="search-container">
-  <div class="query center">
+<div class="search-container center">
+  <div class="query-item">
     <input
       class="input center"
       type="text"
       name=""
       id=""
       placeholder="search item"
-      [(ngModel)]="query"
-      (keyup)="search()"
+      [(ngModel)]="filterCriterion.query"
+      (keyup)="onSearch()"
     />
   </div>
-  <div class="dates center">
-    <div class="dates-item center">
-      <label class="label" for="begin">begin</label>
-      <input
-        class="input center"
-        type="date"
-        name="begin"
-        placeholder="begin date"
-        id="begin"
-        [(ngModel)]="date.begin"
-        (change)="search()"
-      />
-    </div>
-    <div class="dates-item center">
-      <label class="label" for="end">end</label>
-      <input
-        class="input center"
-        type="date"
-        name="end"
-        placeholder="end date"
-        id="end"
-        [(ngModel)]="date.end"
-        (change)="search()"
-      />
-    </div>
+  <div class="dates-item center">
+    <label class="label" for="begin">begin</label>
+    <input
+      class="input center"
+      type="date"
+      name="begin"
+      placeholder="begin date"
+      id="begin"
+      [(ngModel)]="filterCriterion.date.begin"
+      (change)="onSearch()"
+    />
+  </div>
+  <div class="dates-item center">
+    <label class="label" for="end">end</label>
+    <input
+      class="input center"
+      type="date"
+      name="end"
+      placeholder="end date"
+      id="end"
+      [(ngModel)]="filterCriterion.date.end"
+      (change)="onSearch()"
+    />
+  </div>
+  <div class="btn-item">
+    <button (click)="reset()" class="button">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
   </div>
 </div>
