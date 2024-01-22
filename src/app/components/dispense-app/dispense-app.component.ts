@@ -12,6 +12,7 @@ export class DispenseAppComponent implements OnInit {
   date = '';
   loading = false;
   message = '';
+
   inventory: InventoryItem[] = [];
   items: {
     commodity: string;
