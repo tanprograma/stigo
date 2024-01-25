@@ -8,9 +8,27 @@
     </div>
     <div class="content">
       <ul>
-        <li class="center" (click)="setStatistic('dispensed')">DISPENSED</li>
-        <li class="center" (click)="setStatistic('received')">RECEIVED</li>
-        <li class="center" (click)="setStatistic('issued')">ISSUED</li>
+        <li
+          class="center"
+          (click)="setStatistic('dispensed')"
+          [class.active]="statisticType == 'dispensed'"
+        >
+          DISPENSED
+        </li>
+        <li
+          class="center"
+          (click)="setStatistic('received')"
+          [class.active]="statisticType == 'received'"
+        >
+          RECEIVED
+        </li>
+        <li
+          class="center"
+          (click)="setStatistic('issued')"
+          [class.active]="statisticType == 'issued'"
+        >
+          ISSUED
+        </li>
       </ul>
     </div>
   </div>

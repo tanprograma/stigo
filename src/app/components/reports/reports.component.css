@@ -30,6 +30,10 @@ li {
   font-size: large;
   background-color: rgb(169, 215, 231);
 }
+.active {
+  background-color: black;
+  color: white;
+}
 li:hover {
   cursor: pointer;
   background-color: black;

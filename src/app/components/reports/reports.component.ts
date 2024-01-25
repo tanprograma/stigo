@@ -94,6 +94,9 @@ export class ReportsComponent implements OnInit {
   }) {
     this.title = this.setTitle(date);
     this.currentStatistics = this.statistics
+      .filter((i) => {
+        return i.voucher == this.statisticType;
+      })
       .filter((item) => {
         if (query == '') return true;
         const regex = new RegExp(query, 'i');
