@@ -30,7 +30,9 @@ export class FooterComponent implements OnInit, OnDestroy {
     }, 3000);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setDedication();
+  }
   ngOnDestroy(): void {
     clearInterval(this.interval);
   }
