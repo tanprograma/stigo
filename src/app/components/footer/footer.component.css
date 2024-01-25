@@ -1,6 +1,5 @@
 .footer-content {
   height: 100%;
-}
-span {
-  display: block;
+  background-color: black;
+  color: white;
 }
