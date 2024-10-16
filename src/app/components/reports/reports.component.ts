@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   InventoryItem,
   StatisticItem,
@@ -6,6 +6,7 @@ import {
   StockItem,
 } from 'src/app/interfaces';
 import { AppService } from 'src/app/services/app.service';
+import { TransformerService } from 'src/app/services/transformer.service';
 
 type ViewType = 'summary' | 'detailed';
 @Component({
@@ -21,6 +22,7 @@ export class ReportsComponent implements OnInit {
   statistics: StatisticItem[] = [];
   currentStatistics: StatisticItem[] = [];
   title = '';
+  transformer = inject(TransformerService);
   setTitle(date: { begin: string; end: string }) {
     if (date.begin == '' && date.end == '') return '';
     if (date.begin == '' && date.end != '') {
@@ -51,7 +53,10 @@ export class ReportsComponent implements OnInit {
     this.loading = true;
     this.initStatistics(this.app.inventory);
     this.app.getStock().subscribe((stock) => {
-      this.initStatistics(stock);
+      const transformed = this.transformer.transformData(stock, [], [], []);
+      // this.app.stock = transformed;
+      // this.inventory = transformed;
+      this.initStatistics(transformed);
       this.loading = false;
     });
   }

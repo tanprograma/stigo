@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Outlet, User } from 'src/app/interfaces';
 import { AppService } from 'src/app/services/app.service';
+import { TransformerService } from 'src/app/services/transformer.service';
 
 @Component({
   selector: 'app-store-select',
@@ -17,6 +18,7 @@ export class StoreSelectComponent implements OnInit {
   users: User[] = [];
   outlet = '';
   message = 'fetching resources';
+  transformer = inject(TransformerService);
   constructor(private app: AppService, private router: Router) {}
 
   ngOnInit(): void {
@@ -29,21 +31,25 @@ export class StoreSelectComponent implements OnInit {
 
     if (found != undefined) {
       this.app.outlet = found;
-      this.app.getStock();
+      sessionStorage.setItem('outlet', JSON.stringify(found));
+      this.app.getStock().subscribe((stock) => {
+        this.app.stock = this.transformer.transformData(stock, [], [], []);
+      });
       this.router.navigate(['/app/dispense']);
     }
   }
   initialize() {
     this.loading = true;
-    forkJoin<[User[], Outlet[]]>([
-      this.app.getUsers(),
-      this.app.getStores(),
-    ]).subscribe((result) => {
-      this.users = result[0];
-      this.app.stores = result[1];
-      console.log('fetched data');
-      this.loading = false;
-    });
+    forkJoin([this.app.getUsers(), this.app.getStores()]).subscribe(
+      (result) => {
+        this.users = result[0].result.map((user: any) => ({
+          username: user.email,
+        }));
+        this.app.stores = result[1];
+        console.log('fetched data');
+        this.loading = false;
+      }
+    );
   }
   login(user: User) {
     this.loading = true;
@@ -51,12 +57,9 @@ export class StoreSelectComponent implements OnInit {
     this.app.login(user).subscribe((res) => {
       this.loading = false;
 
-      if (res.error == null) {
+      if (res.status) {
         this.loggedIn = true;
-        this.authStores = this.app.stores.filter((store) => {
-          if (res.result?.role == 'admin'.toUpperCase()) return true;
-          return store.name.toUpperCase() == res.result?.role?.toUpperCase();
-        });
+        this.authStores = this.app.stores;
       }
       return;
     });

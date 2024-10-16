@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InventoryItem, StockItem } from 'src/app/interfaces';
 import { AppService } from 'src/app/services/app.service';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { TransformerService } from 'src/app/services/transformer.service';
 @Component({
   selector: 'app-import-dispensed',
   templateUrl: './import-dispensed.component.html',
@@ -21,6 +22,7 @@ export class ImportDispensedComponent implements OnInit {
   prescriptions = 0;
   loading = false;
   message = '';
+  transformer = inject(TransformerService);
   constructor(private app: AppService) {}
 
   ngOnInit(): void {
@@ -31,8 +33,9 @@ export class ImportDispensedComponent implements OnInit {
     this.message = 'initializing the app';
     if (this.app.stock.length > 0) this.inventory = this.app.stock;
     this.app.getStock().subscribe((inv) => {
-      this.app.stock = inv;
-      this.inventory = inv;
+      const transformed = this.transformer.transformData(inv, [], [], []);
+      this.app.stock = transformed;
+      this.inventory = transformed;
       this.loading = false;
     });
   }

@@ -5,37 +5,36 @@ import { StoreSelectComponent } from './components/store-select/store-select.com
 import { StockComponent } from './components/stock/stock.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ImportDispensedComponent } from './components/import-dispensed/import-dispensed.component';
+import { AdvertisementComponent } from './components/advertisement/advertisement.component';
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: '/login',
+    component: AdvertisementComponent,
   },
-  {
-    path: 'login',
-
-    component: StoreSelectComponent,
-  },
-  {
-    path: 'app',
-    component: MainComponent,
-    children: [
-      {
-        path: 'dispense',
-        component: DispenseAppComponent,
-      },
-      {
-        path: 'stock',
-        component: StockComponent,
-      },
-      {
-        path: 'report',
-        component: ReportsComponent,
-      },
-      {
-        path: 'import',
-        component: ImportDispensedComponent,
-      },
-    ],
-  },
+  // {
+  //   path: 'login',
+  //   component: StoreSelectComponent,
+  // },
+  // {
+  //   path: 'app',
+  //   component: MainComponent,
+  //   children: [
+  //     {
+  //       path: 'dispense',
+  //       component: DispenseAppComponent,
+  //     },
+  //     {
+  //       path: 'stock',
+  //       component: StockComponent,
+  //     },
+  //     {
+  //       path: 'report',
+  //       component: ReportsComponent,
+  //     },
+  //     {
+  //       path: 'import',
+  //       component: ImportDispensedComponent,
+  //     },
+  //   ],
+  // },
 ];

@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InventoryItem, StockItem } from 'src/app/interfaces';
 import { AppService } from 'src/app/services/app.service';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { TransformerService } from 'src/app/services/transformer.service';
+import { Sale } from 'src/app/interfaces/sale';
+import { TransactionItem } from 'src/app/interfaces/transaction-item';
+import { Product } from 'src/app/interfaces/product';
 @Component({
   selector: 'app-dispense-app',
   templateUrl: './dispense-app.component.html',
@@ -22,6 +26,7 @@ export class DispenseAppComponent implements OnInit {
   }[] = [];
   submitted = 0;
   prescriptions = 0;
+  transformer = inject(TransformerService);
   constructor(private app: AppService) {}
 
   ngOnInit(): void {
@@ -33,8 +38,9 @@ export class DispenseAppComponent implements OnInit {
     this.message = 'initializing data';
     if (this.app.stock.length > 0) this.inventory = this.app.stock;
     this.app.getStock().subscribe((inv) => {
-      this.app.stock = inv;
-      this.inventory = inv;
+      const transformed = this.transformer.transformData(inv, [], [], []);
+      this.app.stock = transformed;
+      this.inventory = transformed;
       this.loading = false;
     });
   }
@@ -68,27 +74,29 @@ export class DispenseAppComponent implements OnInit {
   submit() {
     this.loading = true;
     this.message = 'uploading dispense data';
-    this.app.dispense(this.items).subscribe((result) => {
-      console.log({ result });
-      this.loading = false;
-      if (result.length > 0) {
-        this.submitted += result.length;
-        // modifies stock
-        result.forEach((r) => {
+    this.app
+      .dispenseNew(this.items)
+      .subscribe((result: { status: boolean; res: Sale }) => {
+        console.log({ result });
+        this.loading = false;
+        if (result.res.products.length > 0) {
+          this.submitted += result.res.products.length;
+          // modifies stock
           this.app.stock = this.app.stock.map((item) => {
-            if (r.commodity == item.commodity && r.outlet == item.outlet) {
-              return r;
-            }
-            return item;
+            const found = result.res.products.find((p: TransactionItem) => {
+              return item.commodity == (p.product as Product).name;
+            });
+            return found == undefined
+              ? item
+              : { ...item, stock: item.stock - found.quantity };
           });
-        });
-        if (result.length == this.items.length) {
-          this.prescriptions += 1;
+          if (result.res.products.length == this.items.length) {
+            this.prescriptions += 1;
 
-          this.clearPrescription();
+            this.clearPrescription();
+          }
         }
-      }
-    });
+      });
   }
   // array to csv
   arrayToCsv(data: { commodity: string; quantity: number }[]) {

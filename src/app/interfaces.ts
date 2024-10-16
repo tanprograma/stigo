@@ -21,9 +21,12 @@ export interface StatisticItem {
 export interface InventoryItem {
   outlet: string;
   commodity: string;
+  commodity_id?: string;
   stock: number;
   unit: string;
   unit_value: number;
+  unit_value_smallest?: number;
+  unit_smallest?: string;
   expiry: string;
   dispensed: { quantity: number; date: number; client: string }[];
   received: { quantity: number; date: number; client: string }[];

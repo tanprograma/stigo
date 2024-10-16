@@ -24,6 +24,7 @@ import { ImportDispensedComponent } from './components/import-dispensed/import-d
 import { FileInputComponent } from './components/file-input/file-input.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoginComponent } from './components/login/login.component';
+import { AdvertisementComponent } from './components/advertisement/advertisement.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LoginComponent } from './components/login/login.component';
     FileInputComponent,
     LoaderComponent,
     LoginComponent,
+    AdvertisementComponent,
   ],
   imports: [
     BrowserModule,

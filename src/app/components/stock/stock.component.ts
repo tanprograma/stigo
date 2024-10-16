@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { StockItem } from 'src/app/interfaces';
 import { AppService } from 'src/app/services/app.service';
+import { TransformerService } from 'src/app/services/transformer.service';
 
 @Component({
   selector: 'app-stock',
@@ -13,11 +14,13 @@ export class StockComponent implements OnInit {
   message = 'getting stock data';
   stock: StockItem[] = [];
   displayed: StockItem[] = [];
-
+  transformer = inject(TransformerService);
   ngOnInit(): void {
     this.loading = true;
     this.app.getStock().subscribe((s) => {
-      this.stock = s;
+      const transformed = this.transformer.transformData(s, [], [], []);
+
+      this.stock = transformed;
       this.displayed = this.stock;
       this.loading = false;
     });
